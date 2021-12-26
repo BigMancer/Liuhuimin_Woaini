@@ -4,6 +4,7 @@ import json
 
 class LHMWAN():
     ID_list = []
+
     def __init__(self):
         with open("./liuhuimin_woaini/text/list.json", "r", encoding='utf-8') as f:
             self.ID_list = json.load(f)
@@ -38,12 +39,22 @@ def api_read_text(LHMWAN, POST):
     # 初始req
     req = {"code": 0,
            "msg": ''}
-    # 随机一个ID
-    randomID = random.choice(LHMWAN.ID_list)
-    # 依据ID，读出文档
-    with open("./liuhuimin_woaini/text/{}".format(randomID), "r", encoding='utf-8') as f:
-        req['msg'] = f.read()
+    # json_data = request.json
+    if POST['action'] == 'read_mail':
+        # 随机抽一个ID
+        randomID = random.choice(LHMWAN.ID_list)
+        # 依据ID，读出文档
+        with open("./liuhuimin_woaini/text/{}".format(randomID), "r", encoding='utf-8') as f:
+            req['msg'] = f.read()
+    elif POST['action'] == 'read_my_story':
+        with open('站点日记.md', 'r', encoding='utf-8') as f:
+            req['msg'] = f.read()
+    elif POST['action'] == 'read_Home':
+        with open('主页.md', 'r', encoding='utf-8') as f:
+            req['msg'] = f.read()
     return req
+
+
 def get_one_ID():
     timedata = time.localtime()
     random_text1 = ""

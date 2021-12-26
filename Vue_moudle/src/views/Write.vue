@@ -1,7 +1,7 @@
 <template>
   <div class="write_page">
     <div class="Write">
-      <textarea name="write_text" id="write" cols="30" rows="30" v-model="msg"  placeholder="我想对你说："></textarea>
+      <textarea name="write_text" id="write" cols="30" rows="15" v-model="msg"  placeholder="我想对你说："></textarea>
       <div id="send_button">
         <button @click="send_mail">
           <span>send</span>

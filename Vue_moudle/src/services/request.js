@@ -1,4 +1,4 @@
-import Qs from 'qs'
+// import Qs from 'qs'
 // 引入
 import axios from "axios"
 // 环境 
@@ -26,7 +26,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 export function post(url, params) {
     return new Promise((resolve, reject) => {
         // axios.defaults.baseURL = "http://刘慧敏.我爱你/"
-        axios.post(url, Qs.stringify(params))
+        axios.post(url, params)
             .then(res => {
                 resolve(res.data);
             })

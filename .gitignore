@@ -1,3 +1,4 @@
 VENV/
 __pycache__
 Vue_moudle/node_modules
+.vscode

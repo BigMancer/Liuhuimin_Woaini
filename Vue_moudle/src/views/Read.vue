@@ -26,6 +26,7 @@ export default {
       // 调用api接口，并传入参数
       const res = await api_read_mail({
         read_text: "",
+        action:'read_mail'
       });
       console.log(res); // 获取的响应结果
       if (res.code == 0) {

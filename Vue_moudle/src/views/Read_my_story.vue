@@ -14,7 +14,7 @@ export default {
   name: "Read_my_story",
   data() {
     return {
-      msg: "# Test",
+      msg: "",
     };
   },
   async mounted() {

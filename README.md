@@ -1,5 +1,9 @@
 ## Flask_Bule
 
+### 配置文件
+
+位置`Flask_Blue/Nebula_BH_No_1/config/config.yaml`
+
 ### 作为应用运行
 
 #### 建立Python 虚拟环境
@@ -34,18 +38,16 @@ python3 app.py
 
 ### 作为蓝图运行
 
-复制`liuhuimin_woaini`文件夹到你的应用内
+复制`Nebula_BH_No_1`文件夹到你的应用内
 
 在你的flask应用内添加
 
 ```python
-from liuhuimin_woaini import liuhuimin_woaini_blue
-from flask import Blueprint
-
-app.register_blueprint(liuhuimin_woaini_blue)
+from Nebula_BH_No_1 import Nebula_BH_No_1_blue
+app.register_blueprint(Nebula_BH_No_1_blue)
 ```
 
-## VUE_moudle
+## Vue_moudle
 
 依据你的环境调整`Vue_moudle\src\services\request.js`的内容，然后：
 

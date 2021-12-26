@@ -1,0 +1,12 @@
+database:
+  neo4j: 
+  # Neo4j数据库相关配置
+    protocol: http
+    host: 127.0.0.1
+    port: 7474
+    user: neo4j
+    password: 'passwd'
+others:
+  file_path: 
+    Home_md: config/主页.md #主页内容相关联MD文件的位置   相对于蓝图的   路径
+    Read_my_story_md: config/站点日记.md  #读读我的故事内容相关联MD文件的位置    相对于蓝图的   路径

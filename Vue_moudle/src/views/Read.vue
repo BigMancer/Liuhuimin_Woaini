@@ -17,21 +17,20 @@ export default {
   data() {
     return {
       msg: "",
-      is_readed: [],
+      readed_list: [],
     };
   },
-
   methods: {
     async read_mail() {
       // 调用api接口，并传入参数
       const res = await api_read_mail({
-        read_text: "",
-        action:'read_mail'
+        action:'read_mail',
+        readed_list:this.readed_list
       });
-      console.log(res); // 获取的响应结果
+      // 获取的响应结果
       if (res.code == 0) {
         this.msg = res.msg;
-        this.is_readed = +res.readID;
+        this.readed_list.push(res.mailID);
       }
     },
   },

@@ -8,11 +8,25 @@
     </div>
     <div id="container">
       <div class="show_page">
-        <router-view/>
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
+<!-- 
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive" />
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"></router-view> -->
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: "App",
+};
+</script>
 
 
 <style>

@@ -16,7 +16,11 @@ const routes = [{
   {
     path: '/write',
     name: 'Write',
-    component: () => import('../views/Write.vue')
+    component: () => import('../views/Write.vue'),
+    meta: {
+      title: "写一封信给你爱的人吧！",
+      keepAlive: true // 需要被缓存
+    }
   },
   {
     path: '/read_my_story',

@@ -1,7 +1,16 @@
 <template>
   <div class="write_page">
     <div class="Write">
-      <textarea name="write_text" id="write" cols="30" rows="15" v-model="msg"  placeholder="我想对你说："></textarea>
+      <keep-alive>
+        <textarea
+          name="write_text"
+          id="write"
+          cols="30"
+          rows="15"
+          v-model="msg"
+          placeholder="我想对你说："
+        ></textarea>
+      </keep-alive>
       <div id="send_button">
         <button @click="send_mail">
           <span>send</span>
@@ -11,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { api_send_mail } from "@/apis/api"; // 导入api
 export default {
@@ -24,20 +32,23 @@ export default {
   methods: {
     async send_mail() {
       // 调用api接口，并传入参数
-      console.log(this.msg);
+      // console.log(this.msg);
       const res = await api_send_mail({
         write_text: this.msg,
       });
-      console.log(res); // 获取的响应结果
+      // 获取的响应结果
       if (res.code == 0) {
         alert("信件已投递");
-        this.msg=""
-      }
-      else
-      {
-         alert("信件投递失败")
+        this.msg = "";
+      } else {
+        this.msg = "投递失败";
+        alert(this.msg);
+        this.msg = "";
       }
     },
+  },
+  mounted() {
+    console.log("我是Write！老娘被挂载了")
   },
 };
 </script>

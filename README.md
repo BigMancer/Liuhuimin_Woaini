@@ -18,6 +18,12 @@ python3 -m venv VENV
 .\VENV\Scripts\Activate.ps1
 ```
 
+#### 切换到目录`Flask_Blue`
+
+```shell
+cd Flask_Blue
+```
+
 #### 安装依赖
 
 ```
@@ -48,6 +54,14 @@ app.register_blueprint(Nebula_BH_No_1_blue)
 ```
 
 ## Vue_moudle
+
+切换到目录`Vue_moudle`
+
+```shell
+cd Vue_moudle
+```
+
+
 
 依据你的环境调整`Vue_moudle\src\services\request.js`的内容，然后：
 

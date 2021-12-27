@@ -8,7 +8,7 @@ import yaml
 from urllib.parse import urljoin
 from .public import get_service_time
 import os
-
+import traceback 
 
 class LHMWAN():
     # 保留蓝图内的所有相关信息，供调用，不提供方法
@@ -33,6 +33,7 @@ class LHMWAN():
             neo4j_config = config['database']['neo4j']
             self.graph = Graph(**neo4j_config)
         except Exception as e:
+            traceback.print_exc() 
             print("数据库加载错误")
             exit()
 

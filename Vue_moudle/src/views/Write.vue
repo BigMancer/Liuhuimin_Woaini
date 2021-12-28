@@ -40,19 +40,13 @@ export default {
       if (res.code == 0) {
         alert("信件已投递");
         this.msg = "";
-      } else {
-        this.msg = "投递失败";
-        alert(this.msg);
-        this.msg = "";
+      } else if (res.code == 1) {
+        alert(res.err);
       }
     },
   },
-  mounted() {
-    console.log("我是Write！老娘被挂载了")
-  },
 };
 </script>
-
 <style scoped>
 .write_page {
   margin: auto;

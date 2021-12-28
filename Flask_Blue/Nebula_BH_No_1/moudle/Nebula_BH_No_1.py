@@ -6,9 +6,11 @@ from py2neo.matching import *
 import hashlib
 import yaml
 from urllib.parse import urljoin
-from .public import get_service_time
+from .public import get_service_time, get_one_ID
 import os
-import traceback 
+import traceback
+APP_ID=  '1640659283'
+
 
 class LHMWAN():
     # 保留蓝图内的所有相关信息，供调用，不提供方法
@@ -27,7 +29,7 @@ class LHMWAN():
         with open(os.path.join(self.path, "config/config.yaml"), 'r',encoding='utf-8') as f:
             config = yaml.safe_load(f)
         self.config = config
-        
+
         # 与neo4j服务器建立连接,取的服务器图形对象。
         try:
             neo4j_config = config['database']['neo4j']
@@ -42,8 +44,14 @@ def write_one_mail(graph, mail_text):
     # 接受mail内容，写入成功返回0
     response = {
         "code": 0,
-        'msg': ''
+        'msg': '写入成功'
     }
+    if len(mail_text) < 15:
+        response = {
+            "code": 1,
+            'err': '请你原谅我，内容不能小于15字。'
+        }
+        return response
     hl = hashlib.md5()
     hl.update(mail_text.encode(encoding='utf-8'))
     mail_text_hash = hl.hexdigest()
@@ -52,22 +60,27 @@ def write_one_mail(graph, mail_text):
         "mail_text": mail_text,
         "time": get_service_time(),
         "IP": "",
-        "mail_ID": "",  # 考虑随机数加时间进行标号，因为时间因数，不会有重复值的。
+        "mail_ID": get_one_ID(APP_ID),  # 考虑随机数加时间进行标号，因为时间因数，不会有重复值的。
         "hash": mail_text_hash  # 用来记录text 的hash，如果有重复，那么禁止提交
     }
     nodes = NodeMatcher(graph)
     result = len(nodes.match("Nebula.BH.No.1", Flag='Nebula.BH.No.1', hash=mail_text_hash)
                  )
     if not result == 0:
-        response['code'] = 1
-        response['msg'] = "哦！天呐！怎么可能会有两个人给我发同样的信件啊！"
+        response = {
+            "code": 1,
+            'err': "哦~上帝啊！！快来看呐~居然有两个人冥冥中写出了相同的信件，不过很抱歉，不能让你通过我的拦截。"
+        }
+        return response
     try:
         # 建立节点对象
         node = Node("Nebula.BH.No.1", **node_properties)
         graph.create(node)
     except Exception as e:
-        response['code'] = 1
-        response['msg'] = "发送失败 失败代码：173420897682453987"
+        response = {
+            "code": 1,
+            'err': "发送失败 失败代码：173420897682453987"
+        }
         return response
     return response
 
@@ -82,11 +95,13 @@ def read_one_mail(graph, readed_list):
         'mailID': ''
     }
     nodes = NodeMatcher(graph)
-    result = nodes.match("Nebula.BH.No.1", Flag='Nebula.BH.No.1')
+    result = nodes.match("Nebula.BH.No.1", Flag='Nebula.BH.No.1').limit(100)
     for i in iter(result):
-        if i['hash'] not in readed_list and i['hash'] != 'Null':
+        # 如果找到的信件不在已读的ID列表内,则返回该信件
+        if i['mail_ID'] not in readed_list:
             response['msg'] = i["mail_text"]
-            response['mailID'] = i['hash']
+            # TODO:以mail_ID为标识的话，他就不能为空了，数据库里面的需要维护
+            response['mailID'] = i['mail_ID']
             return response
             break
     response['msg'] = "小站的信件被读完了"

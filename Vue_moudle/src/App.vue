@@ -1,5 +1,5 @@
 <template>
-<!-- TODO: 需要适配一下手机版本的前端 -->
+  <!-- TODO: 需要适配一下手机版本的前端 -->
   <div>
     <div id="nav">
       <router-link to="/">主页</router-link> |
@@ -14,7 +14,7 @@
             <component :is="Component" />
           </keep-alive>
         </router-view>
-<!-- 
+        <!-- 
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive" />
         </keep-alive>

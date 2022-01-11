@@ -150,15 +150,14 @@ button:hover .liquid {
   }
 }
 #write {
-  background-color: transparent;
-  border: 0;
-  outline: none;
-  text-align: left;
-  width: 100%;
-  color: #000000;
-  font-weight: bold;
-  font-size: x-large;
-  text-indent: 20px;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    text-align: left;
+    width: 100%;
+    color: #000000;
+    font-weight: bold;
+    font-size: x-large;
 }
 #send_button {
   float: right;

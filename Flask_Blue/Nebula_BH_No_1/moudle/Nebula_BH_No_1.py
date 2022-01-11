@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 from .public import get_service_time, get_one_ID
 import os
 import traceback
-APP_ID=  '1640659283'
+APP_ID = '1640659283'
 
 
 class LHMWAN():
@@ -26,7 +26,7 @@ class LHMWAN():
         # 蓝图路径
         self.path = blue_info.root_path
         # 读取配置文件
-        with open(os.path.join(self.path, "config/config.yaml"), 'r',encoding='utf-8') as f:
+        with open(os.path.join(self.path, "config/config.yaml"), 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
         self.config = config
 
@@ -35,7 +35,7 @@ class LHMWAN():
             neo4j_config = config['database']['neo4j']
             self.graph = Graph(**neo4j_config)
         except Exception as e:
-            traceback.print_exc() 
+            traceback.print_exc()
             print("数据库加载错误")
             exit()
 
@@ -96,14 +96,21 @@ def read_one_mail(graph, readed_list):
     }
     nodes = NodeMatcher(graph)
     result = nodes.match("Nebula.BH.No.1", Flag='Nebula.BH.No.1').limit(100)
-    for i in iter(result):
+    result_list = result.all()
+    while 1:
+        # 不停的随机抽取信件，直到找到符合要求的。
+        # 每次抽取到不符合的，则将其从列表中删掉
+        if  result_list==[]:
+            break
+        i = random.choice(result_list)
         # 如果找到的信件不在已读的ID列表内,则返回该信件
-        if i['mail_ID'] not in readed_list:
+        if i['mail_ID'] in readed_list:
+            result_list.remove(i)
+        else:
             response['msg'] = i["mail_text"]
-            # TODO:以mail_ID为标识的话，他就不能为空了，数据库里面的需要维护
             response['mailID'] = i['mail_ID']
             return response
-            break
+
     response['msg'] = "小站的信件被读完了"
     return response
 

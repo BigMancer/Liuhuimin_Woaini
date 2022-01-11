@@ -1,6 +1,12 @@
 <template>
   <div class="Read">
-    <p>{{ msg }}</p>
+    <textarea
+          name="Read_text"
+          id="write"
+          cols="30"
+          rows="15"
+          v-model="msg"
+        ></textarea>
     <div id="send_button">
       <button @click="read_mail">
         <span>下一封信</span>
@@ -44,7 +50,16 @@ export default {
 #container {
   display: inline;
 }
-
+#write {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    text-align: left;
+    width: 100%;
+    color: #000000;
+    font-weight: bold;
+    font-size: x-large;
+}
 button {
   position: relative;
   padding-top: 10px;

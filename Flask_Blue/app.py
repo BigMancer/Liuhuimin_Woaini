@@ -17,7 +17,7 @@ except Exception as e :
 # 注册蓝图
 app.register_blueprint(Nebula_BH_No_1_blue)
 
-# CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True)
 if __name__ == '__main__':
 
     # 这里的代码如果使用uwsgi运行的话是不会被执行的哦~

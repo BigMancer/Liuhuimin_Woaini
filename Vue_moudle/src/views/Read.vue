@@ -1,12 +1,6 @@
 <template>
   <div class="Read">
-    <textarea
-          name="Read_text"
-          id="write"
-          cols="30"
-          rows="15"
-          v-model="msg"
-        ></textarea>
+    <v-md-preview :text="msg"></v-md-preview>
     <div id="send_button">
       <button @click="read_mail">
         <span>下一封信</span>
@@ -18,8 +12,21 @@
 
 <script>
 import { api_read_mail } from "@/apis/api";
+import VMdPreview from "@kangc/v-md-editor/lib/preview";
+import "@kangc/v-md-editor/lib/style/preview.css";
+import githubTheme from "@kangc/v-md-editor/lib/theme/github.js";
+import "@kangc/v-md-editor/lib/theme/style/github.css";
+// highlightjs
+import hljs from "highlight.js";
+
+VMdPreview.use(githubTheme, {
+  Hljs: hljs,
+});
 export default {
   name: "Read",
+  components: {
+    VMdPreview,
+  },
   data() {
     return {
       msg: "",
@@ -30,8 +37,8 @@ export default {
     async read_mail() {
       // 调用api接口，并传入参数
       const res = await api_read_mail({
-        action:'read_mail',
-        readed_list:this.readed_list
+        action: "read_mail",
+        readed_list: this.readed_list,
       });
       // 获取的响应结果
       if (res.code == 0) {
@@ -41,7 +48,7 @@ export default {
     },
   },
   mounted() {
-    this.read_mail()
+    this.read_mail();
   },
 };
 </script>
@@ -51,14 +58,14 @@ export default {
   display: inline;
 }
 #write {
-    background-color: transparent;
-    border: 0;
-    outline: none;
-    text-align: left;
-    width: 100%;
-    color: #000000;
-    font-weight: bold;
-    font-size: x-large;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  text-align: left;
+  width: 100%;
+  color: #000000;
+  font-weight: bold;
+  font-size: x-large;
 }
 button {
   position: relative;

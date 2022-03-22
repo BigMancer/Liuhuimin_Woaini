@@ -29,4 +29,5 @@
 
 #header_waves {
     background-image: url(../pic/header_waves.svg);
+    background-repeat: repeat-x;
 }

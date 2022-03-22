@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO: 需要适配一下手机版本的前端 -->
+
   <div>
     <div id="nav">
       <router-link to="/">主页</router-link> |

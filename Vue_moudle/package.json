@@ -53,5 +53,12 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "main": "babel.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "Machine",
+  "license": "ISC",
+  "description": "Nebula_BH_No_1的前端依赖文件"
 }

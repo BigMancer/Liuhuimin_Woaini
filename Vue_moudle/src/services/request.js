@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://127.0.0.1:5000';
 } else if (process.env.NODE_ENV == 'production') {
     // 生产环境  
-    axios.defaults.baseURL = 'http://刘慧敏.我爱你/';
+    axios.defaults.baseURL = 'http://bluemachine.love/';
 }
 // 请求超时
 axios.defaults.timeout = 30000;
@@ -25,7 +25,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
  */
 export function post(url, params) {
     return new Promise((resolve, reject) => {
-        // axios.defaults.baseURL = "http://刘慧敏.我爱你/"
         axios.post(url, params)
             .then(res => {
                 resolve(res.data);

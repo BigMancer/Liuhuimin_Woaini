@@ -9,5 +9,5 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://127.0.0.1:5000';
 } else if (process.env.NODE_ENV == 'production') {
     // 生产环境  
-    axios.defaults.baseURL = 'http://刘慧敏.我爱你/';
+    axios.defaults.baseURL = 'http://bluemachine.love/';
 }

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://127.0.0.1:5000';
 } else if (process.env.NODE_ENV == 'production') {
     // 生产环境  
-    axios.defaults.baseURL = 'http://bluemachine.love/';
+    axios.defaults.baseURL = 'http://blue-cat-blue.love/';
 }
 // 请求超时
 axios.defaults.timeout = 30000;
